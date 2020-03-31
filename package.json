@@ -1,0 +1,24 @@
+{
+  "name": "set-json-version",
+  "version": "1.0.0",
+  "description": "Easily update the version of a list of JSON files",
+  "main": "index.js",
+  "bin": {
+    "set-json-version": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlosjeurissen/set-json-version.git"
+  },
+  "keywords": [
+    "set-version",
+    "json",
+    "version"
+  ],
+  "author": "Carlos Jeurissen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlosjeurissen/set-json-version/issues"
+  },
+  "homepage": "https://github.com/carlosjeurissen/set-json-version#readme"
+}
