@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+'use strict';
+
 const fs = require('fs');
 const argList = process.argv.join('=').split('=');
 
@@ -56,7 +59,7 @@ const readJsonFromFile = (filePath, callback) => {
 filePaths.forEach(function (filePath) {
   readJsonFromFile(filePath, (json) => {
     if (typeof json === 'object') {
-      json.value = version;
+      json.version = version;
       writeJsonToFile(filePath, json);
     } else {
       console.error('Root type is not an object'); 
