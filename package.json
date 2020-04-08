@@ -20,5 +20,8 @@
   "main": "index.js",
   "bin": {
     "set-json-version": "./index.js"
+  },
+  "devDependencies": {
+    "semistandard": "^14.2.0"
   }
 }

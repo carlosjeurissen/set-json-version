@@ -15,7 +15,7 @@ argList.forEach((item, index, array) => {
     versionIndex = index + 1;
     filesIndexEnd = index;
   }
-})
+});
 
 if (!filesIndexStart) {
   console.error('No files specified');
@@ -52,7 +52,7 @@ const readJsonFromFile = (filePath, callback) => {
       } catch (e) {
         console.error('Could not parse JSON in ' + filePath, e);
       }
-    }    
+    }
   });
 };
 
@@ -62,7 +62,7 @@ filePaths.forEach(function (filePath) {
       json.version = version;
       writeJsonToFile(filePath, json);
     } else {
-      console.error('Root type is not an object'); 
+      console.error('Root type is not an object');
     }
   });
 });
