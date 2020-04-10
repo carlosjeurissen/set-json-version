@@ -1,6 +1,6 @@
 {
   "name": "set-json-version",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Easily update the version of a list of JSON files",
   "keywords": [
     "set-version",
