@@ -1,6 +1,6 @@
 {
   "name": "set-json-version",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Easily update the version of a list of JSON files",
   "keywords": [
     "set-version",
@@ -22,6 +22,6 @@
     "set-json-version": "./index.js"
   },
   "devDependencies": {
-    "semistandard": "^14.2.0"
+    "semistandard": "~14.2.2"
   }
 }
