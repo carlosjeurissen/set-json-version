@@ -8,7 +8,7 @@ let versionIndex;
 let filesIndexStart;
 let filesIndexEnd;
 
-argList.forEach((item, index, array) => {
+argList.forEach((item, index) => {
   if (item === '--files' || item === '-f') {
     filesIndexStart = index + 1;
   } else if (item === '--version' || item === '-v') {
