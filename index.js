@@ -1,68 +1,24 @@
-#!/usr/bin/env node
-'use strict';
+import fs from 'node:fs';
 
-const fs = require('fs');
-const argList = process.argv.join('=').split('=');
-
-let versionIndex;
-let filesIndexStart;
-let filesIndexEnd;
-
-argList.forEach((item, index) => {
-  if (item === '--files' || item === '-f') {
-    filesIndexStart = index + 1;
-  } else if (item === '--version' || item === '-v') {
-    versionIndex = index + 1;
-    filesIndexEnd = index;
-  }
-});
-
-if (!filesIndexStart) {
-  console.error('No files specified');
-  process.exit(1);
-}
-
-if (!versionIndex || versionIndex === filesIndexStart) {
-  console.error('No version specified');
-  process.exit(1);
-}
-
-const version = argList[versionIndex];
-const filePaths = argList.slice(filesIndexStart, filesIndexEnd);
-
-const writeJsonToFile = (filePath, json) => {
+function writeJsonToFile (filePath, json) {
   const stringifedJson = JSON.stringify(json, null, 2);
-  fs.writeFile(filePath, stringifedJson, 'utf8', (err) => {
-    if (err) {
-      console.error('Could not write to ' + filePath);
-    } else {
-      console.log('Setting version for ' + filePath);
-    }
-  });
-};
+  return fs.promises.writeFile(filePath, stringifedJson, 'utf8');
+}
 
-const readJsonFromFile = (filePath, callback) => {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      console.warn('Could not open ' + filePath);
-    } else {
-      try {
-        const json = JSON.parse(data);
-        callback(json);
-      } catch (e) {
-        console.error('Could not parse JSON in ' + filePath, e);
-      }
-    }
-  });
-};
+function readJsonFromFile (filePath) {
+  return fs.promises.readFile(filePath, 'utf8').then(JSON.parse);
+}
 
-filePaths.forEach(function (filePath) {
-  readJsonFromFile(filePath, (json) => {
-    if (typeof json === 'object') {
-      json.version = version;
-      writeJsonToFile(filePath, json);
-    } else {
-      console.error('Root type is not an object');
-    }
-  });
-});
+async function handleSingleFile ({ filePath, version }) {
+  const json = await readJsonFromFile(filePath);
+  if (typeof json !== 'object' || json === null) {
+    throw new Error('Root type is not an object');
+  }
+  json.version = version;
+  await writeJsonToFile(filePath, json);
+}
+
+export default function setJsonVersion ({ filePaths, version }) {
+  const promises = filePaths.map((filePath) => handleSingleFile({ filePath, version }));
+  return Promise.all(promises);
+}

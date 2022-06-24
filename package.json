@@ -1,12 +1,13 @@
 {
   "name": "set-json-version",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Easily update the version of a list of JSON files",
   "keywords": [
     "set-version",
     "json",
     "version"
   ],
+  "type": "module",
   "homepage": "https://github.com/carlosjeurissen/set-json-version#readme",
   "bugs": {
     "url": "https://github.com/carlosjeurissen/set-json-version/issues"
@@ -19,7 +20,7 @@
   "author": "Carlos Jeurissen",
   "main": "index.js",
   "bin": {
-    "set-json-version": "./index.js"
+    "set-json-version": "cli.js"
   },
   "eslintConfig": {
     "extends": "ccb",
@@ -30,6 +31,6 @@
   },
   "devDependencies": {
     "eslint": "^8.18.0",
-    "eslint-config-ccb": "^0.0.15"
+    "eslint-config-ccb": "^0.0.17"
   }
 }

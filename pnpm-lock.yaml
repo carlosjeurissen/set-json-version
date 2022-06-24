@@ -2,11 +2,11 @@ lockfileVersion: 5.4
 
 specifiers:
   eslint: ^8.18.0
-  eslint-config-ccb: ^0.0.15
+  eslint-config-ccb: ^0.0.17
 
 devDependencies:
   eslint: 8.18.0
-  eslint-config-ccb: 0.0.15_eslint@8.18.0
+  eslint-config-ccb: 0.0.17_eslint@8.18.0
 
 packages:
 
@@ -456,8 +456,8 @@ packages:
       object.entries: 1.1.5
     dev: true
 
-  /eslint-config-ccb/0.0.15_eslint@8.18.0:
-    resolution: {integrity: sha512-0yUaMe/edaxLhCvawmczMrSAqKjpbq3X5Q1ze2IX/dcWe1ToXZqdO37uEXttBuUBodyoLOuHXL+lGjAst8/Xqw==}
+  /eslint-config-ccb/0.0.17_eslint@8.18.0:
+    resolution: {integrity: sha512-Fw4rlQcesSkrq04SYtsv64w9o1cN3PkAtjegtJEAxjIcr3YVgZW9dIBlZELNVnkEyyIWayjr50WbBDD1XTWgyA==}
     dependencies:
       eslint-config-airbnb: 19.0.4_h7xqtcnzuvoj7ivkhmuaagpsxu
       eslint-plugin-import: 2.26.0_eslint@8.18.0
