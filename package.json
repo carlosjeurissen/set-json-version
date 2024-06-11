@@ -1,6 +1,6 @@
 {
   "name": "set-json-version",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "Easily update the version of a list of JSON files",
   "keywords": [
     "set-version",
@@ -22,16 +22,9 @@
   "bin": {
     "set-json-version": "cli.js"
   },
-  "eslintConfig": {
-    "extends": "ccb",
-    "env": {
-      "es2022": true,
-      "node": true
-    }
-  },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-config-ccb": "^0.16.3"
+    "eslint": "^9.4.0",
+    "eslint-config-ccb": "^0.26.0"
   },
   "engines": {
     "node": ">=12.20.0"
