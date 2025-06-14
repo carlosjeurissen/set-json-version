@@ -2,35 +2,60 @@
 
 import setJsonVersion from './index.js';
 
-const argList = process.argv.join('=').split('=');
-
-let versionIndex;
-let filesIndexStart;
-let filesIndexEnd;
-
-argList.forEach((item, index) => {
-  if (item === '--files' || item === '-f') {
-    filesIndexStart = index + 1;
-  } else if (item === '--version' || item === '-v') {
-    versionIndex = index + 1;
-    filesIndexEnd = index;
+function printUsageAndExit (errorMessage) {
+  if (errorMessage) {
+    console.error(`Error: ${errorMessage}\n`);
   }
-});
-
-if (!filesIndexStart) {
-  console.error('No files specified');
+  console.log('Usage: set-json-version --version <version> --files <file1> [<file2> ...]');
+  console.log('       set-json-version -v <version> -f <file1> [<file2> ...]\n');
+  console.log('Options:');
+  console.log('  -v, --version   The version to set in the JSON files (required)');
+  console.log('  -f, --files     A list of JSON files to update (required)');
+  console.log('  -h, --help      Show this help message');
   process.exit(1);
 }
 
-if (!versionIndex || versionIndex === filesIndexStart) {
-  console.error('No version specified');
-  process.exit(1);
+const args = process.argv.slice(2);
+
+if (args.includes('--help') || args.includes('-h')) {
+  printUsageAndExit();
 }
 
-const version = argList[versionIndex];
-const filePaths = argList.slice(filesIndexStart, filesIndexEnd);
+// Find the version argument first
+const versionIndex = args.findIndex((arg) => arg === '--version' || arg === '-v');
 
-setJsonVersion({ filePaths, version }).catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (versionIndex === -1) {
+  printUsageAndExit('No version flag specified.');
+}
+
+const version = args[versionIndex + 1];
+
+if (!version || version.startsWith('-')) {
+  printUsageAndExit('Version value is missing or invalid.');
+}
+
+// Find the files argument
+const filesIndex = args.findIndex((arg) => arg === '--files' || arg === '-f');
+
+if (filesIndex === -1) {
+  printUsageAndExit('No files flag specified.');
+}
+
+const filePaths = [];
+// All subsequent arguments are file paths until another flag is encountered
+for (let i = filesIndex + 1; i < args.length; i++) {
+  if (args[i].startsWith('-')) {
+    break;
+  }
+  filePaths.push(args[i]);
+}
+
+if (filePaths.length === 0) {
+  printUsageAndExit('No file paths were provided.');
+}
+
+setJsonVersion({ filePaths, version })
+  .catch((error) => {
+    console.error(`An error occurred: ${error.message}`);
+    process.exit(1);
+  });
