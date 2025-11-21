@@ -3,7 +3,7 @@ import fs from 'node:fs';
 async function handleSingleFile ({ filePath, version }) {
   try {
     // 1. Read the file content.
-    const fileContent = await fs.promises.readFile(filePath, 'utf8');
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
     const json = JSON.parse(fileContent);
 
     // 2. Validate that the root of the JSON is an object.
@@ -14,7 +14,7 @@ async function handleSingleFile ({ filePath, version }) {
     // 3. Update the version and write the file back.
     json.version = version;
     const stringifiedJson = JSON.stringify(json, null, 2);
-    await fs.promises.writeFile(filePath, stringifiedJson, 'utf8');
+    await fs.promises.writeFile(filePath, stringifiedJson, 'utf-8');
   } catch (error) {
     // 4. Add context to any errors that occur.
     throw new Error(`Failed to process file "${filePath}": ${error.message}`);
